@@ -1,0 +1,22 @@
+{
+  "name": "vrdevices",
+  "description": "Simple cross-browser wrapper around getVRDevices",
+  "keywords": [
+    "vr",
+    "browser"
+  ],
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jb55/vrdevices.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "browserify test/test.js > test/build.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^6.3.3",
+    "tape": "^3.0.3"
+  }
+}
