@@ -12,10 +12,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "browserify test/test.js > test/build.js"
+    "test-browser": "beefy test/test.js"
   },
   "dependencies": {},
   "devDependencies": {
+    "beefy": "^2.1.1",
     "browserify": "^6.3.3",
     "tape": "^3.0.3"
   }

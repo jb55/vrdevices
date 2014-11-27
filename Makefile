@@ -3,6 +3,6 @@ clean:
 	rm -f test/build.js
 
 test:
-	npm test
+	npm run test-browser
 
 .PHONY: test
