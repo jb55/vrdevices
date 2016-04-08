@@ -26,23 +26,13 @@ function getType (typ, done) {
 }
 
 function getPositionSensors (done) {
-  if ('VRDisplay' in window) {
-    return getType(VRDisplay, done);
-  } else if ('PositionSensorVRDevice' in window) {
-    return getType(PositionSensorVRDevice, done);
-  } else {
-    return getType(null, []);
-  }
+  var typ = window.VRDisplay || window.PositionSensorVRDevice;
+  return getType(typ, done);
 }
 
 function getHmds (done) {
-  if ('VRDisplay' in window) {
-    return getType(VRDisplay, done);
-  } else if ('HMDVRDevice' in window) {
-    return getType(HMDVRDevice, done);
-  } else {
-    return getType(null, []);
-  }
+  var typ = window.VRDisplay || window.HMDVRDevice;
+  return getType(typ, done);
 }
 
 getVRDevices.positionSensors = getPositionSensors;
