@@ -1,28 +1,28 @@
 
 # vrdevices
 
-  Small wrapper around getVRDevices for Firefox and Chromium WebVR builds
+  Small wrapper around the [WebVR API](https://mozvr.github.io/webvr-spec/) for [Firefox Nightly](http://mozvr.com/#start) and [Chromium WebVR builds](https://webvr.info/get-chrome/).
 
 ## Installation
 
-  Install with npm
+  Install with npm:
 
     $ npm install vrdevices
 
 ## Example
 
 ```js
-var vrdevices = require('vrdevices')
+var vrdevices = require('vrdevices');
 
 // Get all devices
-vrdevices(function(err, devices){
-  // err if webvr not supported
-  if (err) return alert(err.message);
+vrdevices(function (err, devices) {
+  // Error if WebVR is not supported
+  if (err) { return alert(err.message); }
 });
 
 // Get specific devices
-vrdevices.hmds(function(err, devices){});
-vrdevices.positionSensors(function(err, devices){});
+vrdevices.hmds(function (err, devices) { });
+vrdevices.positionSensors(function (err, devices) { });
 ```
 
 ## License

@@ -1,34 +1,48 @@
+/* global HMDVRDevice, PositionSensorVRDevice, VRDisplay */
 
-
-function getVRDevices(done) {
-  if (navigator.getVRDevices) {
+function getVRDevices (done) {
+  if (navigator.getVRDisplays) {
+    return navigator.getVRDisplays().then(next);
+  } else if (navigator.getVRDevices) {
     return navigator.getVRDevices().then(next);
   } else if (navigator.mozGetVRDevices) {
     return navigator.mozGetVRDevices(next);
   } else {
-    return done(Error("Your browser is not VR Ready"), []);
+    return done(new Error('Your browser is not VR Ready'), []);
   }
 
-  function next(devices) {
+  function next (devices) {
     return done(null, devices || []);
   }
 }
 
-function getType(typ, done) {
-  return getVRDevices(function(err, devices){
-    if (err) return done(err, devices);
-    done(null, devices.filter(function(device){
+function getType (typ, done) {
+  return getVRDevices(function (err, devices) {
+    if (err) { return done(err, devices); }
+    done(null, devices.filter(function (device) {
       return device instanceof typ;
     }));
   });
 }
 
-function getPositionSensors(done) {
-  return getType(PositionSensorVRDevice, done);
+function getPositionSensors (done) {
+  if ('VRDisplay' in window) {
+    return getType(VRDisplay, done);
+  } else if ('PositionSensorVRDevice' in window) {
+    return getType(PositionSensorVRDevice, done);
+  } else {
+    return getType(null, []);
+  }
 }
 
-function getHmds(done) {
-  return getType(HMDVRDevice, done);
+function getHmds (done) {
+  if ('VRDisplay' in window) {
+    return getType(VRDisplay, done);
+  } else if ('HMDVRDevice' in window) {
+    return getType(HMDVRDevice, done);
+  } else {
+    return getType(null, []);
+  }
 }
 
 getVRDevices.positionSensors = getPositionSensors;
